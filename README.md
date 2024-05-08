@@ -24,7 +24,7 @@ In general terms, the code is developed in Matlab language and consists of the f
 Note: We rely on Matlab built-in optimizers (see "fminsearch" and "fmincon")
 
 # References:
-[1] E. Schwartz (1997) - "The stochastic behavior of commodity prices: Implications for valuation and hedging"
-[2] X.S. Yan (2002) - "Valuation of commodity derivatives in a new multi-factor model"
-[3] W.K. Hughen (2010) - "A maximal affine stochastic volatility model of oil prices"
+[1] E. Schwartz (1997) - "The stochastic behavior of commodity prices: Implications for valuation and hedging" \
+[2] X.S. Yan (2002) - "Valuation of commodity derivatives in a new multi-factor model"\
+[3] W.K. Hughen (2010) - "A maximal affine stochastic volatility model of oil prices"\
 [4] S. Spinler & Schone (2017) - 
