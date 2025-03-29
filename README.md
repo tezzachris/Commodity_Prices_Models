@@ -1,13 +1,13 @@
 ## Commodity Stochastic Factor Models 
 
-The models we present here possess an affine (or quasi) formula for the future commodity pricing. 
+The models we consider here all possess a quasi-affine formula for the pricing of commodity futures. 
 
 Which factors? Typically in the literature: log-spot commodity price, convenience yield, interest rate, volatility of log-price, long-term mean of log-price
-Which commodities? 
+Which commodities? We considered mainly crude-oil, copper, natural gas
 
 # The Models
-- One-two-three factor models in [1]
-- Three factor model in [3]
+- One-two-three factor in [1]
+- Three factor in [3]
 - Four factor in [2]
 - Four factor in [4]
 
@@ -27,4 +27,5 @@ Note: We rely on Matlab built-in optimizers (see "fminsearch" and "fmincon")
 [1] E. Schwartz (1997) - "The stochastic behavior of commodity prices: Implications for valuation and hedging" \
 [2] X.S. Yan (2002) - "Valuation of commodity derivatives in a new multi-factor model"\
 [3] W.K. Hughen (2010) - "A maximal affine stochastic volatility model of oil prices"\
-[4] S. Spinler & Schone (2017) - 
+[4] S. Spinler & Schone (2017) - "A four-factor stochastic volatility model of commodity prices"\
+[5] Ballestra, Tezza (2025) - "A multi-factor model for improved commodity pricing: Calibration and an application to the oil market"
