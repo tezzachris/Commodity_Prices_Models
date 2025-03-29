@@ -1,4 +1,19 @@
 
+%Log-Likelihood for Schwartz one-dimensional model for commodity log-spot prices
+
+%Inputs
+
+%theta: vector parameters 
+%yt: matrix of log-future prices (time per row, maturity per column)
+%T: maturities vector (expressed in years)
+%h: Euler discretization time step
+
+%Outputs
+%ll: log-likelihood value
+%lp: log-likelihood point in time values
+%Xt: filtered state variable/s
+%et: filtered errors
+%a,Z: affine coefficients in log-price equation
 
 function [ll, lp, Xt, et,a,Z] = loglik_schwartz1d(theta, yt, T, h)
     
@@ -15,7 +30,7 @@ function [ll, lp, Xt, et,a,Z] = loglik_schwartz1d(theta, yt, T, h)
     
     H = diag( sigepsi.^2 );
 
-    %constant risk premia B=Bf, that is lambda
+    %assume constant risk premia B=Bf, that is lambda
     A = kx * r - sigx^2/2;
 
     Af =  kx * mux  -  sigx^2 / 2 ;
@@ -26,12 +41,12 @@ function [ll, lp, Xt, et,a,Z] = loglik_schwartz1d(theta, yt, T, h)
 
     omega0 = sigx^2 ;
     
-    %Runge kutta per coefficienti affini
+    %Runge kutta for affine coefficients
     alphastar = A/kx ;
     a = (1-exp(-kx*T))*alphastar + sigx^2/(4*kx) * (1-exp(-2*kx*T));
     Z = exp(-kx*T);
 
-    %Linear Kalman Filter
+    %Linear Kalman Filter equations
 
     ll = 0; 
     lp = zeros(n,1);
@@ -39,10 +54,10 @@ function [ll, lp, Xt, et,a,Z] = loglik_schwartz1d(theta, yt, T, h)
     I = 1;
     et = zeros(n,ny);
 
-    %initial state vars
+    %initial state variables
     Xt0 = mux  - sigx^2 /2;
     
-    Pt = sigx^2/(2*kx) * (1 - exp(-2*kx*mean(T))); %conta per et 
+    Pt = sigx^2/(2*kx) * (1 - exp(-2*kx*mean(T))); 
     
     for i = 1 : n 
         if i > 1
@@ -55,7 +70,7 @@ function [ll, lp, Xt, et,a,Z] = loglik_schwartz1d(theta, yt, T, h)
     
         %Prediction error
         vt = yt(i,:) - ypred ; %mean
-        Ft = Z * Ppred * Z' + H; %variance + MEASUREMENT ERROR
+        Ft = Z * Ppred * Z' + H; %variance + measurement error
         
         %Kalman gain
         Kt = (Ppred * Z)/(Ft);
@@ -67,7 +82,7 @@ function [ll, lp, Xt, et,a,Z] = loglik_schwartz1d(theta, yt, T, h)
         lp(i) = 0.5 * ( ny * log(2*pi) + log( det(Ft) ) +  (vt / Ft * vt') ); %vt needs to be column vector
         ll = ll + lp(i);    
 
-        et(i,:) = vt/sqrt(Ft); %var epsilon t
+        et(i,:) = vt/sqrt(Ft); 
 
     end     
 end   
